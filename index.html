@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upscale 3-Day Workshop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700&family=Figtree:wght@500;600&family=Roboto:wght@400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #101010;
+      color: #FFFFFF;
+      font-family: 'Archivo', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ===== BACKGROUND ELEMENTS ===== */
+    .bg-polygon {
+      position: absolute;
+      top: -80px;
+      left: -120px;
+      width: 600px;
+      height: 641px;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .bg-gradient-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 707px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(202, 234, 110, 0.08) 0%, rgba(202, 234, 110, 0.03) 30%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ===== LAYOUT ===== */
+    .page-wrapper {
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 80px;
+      padding: 0 20px;
+      padding-bottom: 80px;
+    }
+
+    /* ===== LOGO ===== */
+    .logo-section {
+      width: 100%;
+      padding-top: 32px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .logo-section img {
+      width: 180px;
+      height: auto;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-photo {
+      width: 349px;
+      height: 362px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .hero-dates {
+      width: 683px;
+      max-width: 100%;
+      height: auto;
+      margin-top: -60px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ===== TITLE SECTION ===== */
+    .title-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    /* Badge */
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: linear-gradient(135deg, rgba(202, 234, 110, 0.15), rgba(202, 234, 110, 0.05));
+      border: 1px solid #CAEA6E;
+      border-radius: 50px;
+      padding: 8px 8px 8px 14px;
+    }
+
+    .badge-text {
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      background: linear-gradient(135deg, #CAEA6E, #8ab83a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      white-space: nowrap;
+    }
+
+    .badge-gratuit {
+      background: #CAEA6E;
+      color: #101010;
+      font-family: 'Archivo', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 6px 12px;
+      margin-left: 10px;
+      white-space: nowrap;
+    }
+
+    /* Heading */
+    .main-heading {
+      font-family: 'Archivo', sans-serif;
+      font-size: 42px;
+      font-weight: 400;
+      color: #FFFFFF;
+      text-align: center;
+      line-height: 1.2;
+      max-width: 900px;
+    }
+
+    /* Avatars row */
+    .avatars-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .avatars-stack {
+      display: flex;
+      align-items: center;
+    }
+
+    .avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 2px solid #161616;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .avatar:not(:first-child) {
+      margin-left: -5px;
+    }
+
+    .avatar-count {
+      background: #FFFFFF;
+      border-radius: 100px;
+      padding: 6px 10px;
+      font-family: 'Archivo', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #101010;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      margin-left: -5px;
+      white-space: nowrap;
+    }
+
+    .avatars-label {
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #FFFFFF;
+      line-height: 1.3;
+    }
+
+    /* CTA row */
+    .cta-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #CAEA6E;
+      color: #101010;
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      border: none;
+      border-radius: 1000px;
+      padding: 14px 30px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(202, 234, 110, 0.3);
+      background: #d4f07a;
+    }
+
+    .btn-cta:active {
+      transform: translateY(0);
+    }
+
+    .btn-cta .arrow {
+      font-size: 20px;
+      transition: transform 0.2s ease;
+    }
+
+    .btn-cta:hover .arrow {
+      transform: translateX(3px);
+    }
+
+    .counter {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .counter-number {
+      font-family: 'Figtree', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      color: #CAEA6E;
+      line-height: 1.2;
+    }
+
+    .counter-label {
+      font-family: 'Figtree', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #CAEA6E;
+      line-height: 1.3;
+    }
+
+    /* ===== SECTION DIVIDER ===== */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+    }
+
+    .divider-line-left {
+      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3));
+    }
+
+    .divider-line-right {
+      background: linear-gradient(to left, transparent, rgba(255, 255, 255, 0.3));
+    }
+
+    .divider-icon {
+      color: #CAEA6E;
+      font-size: 18px;
+    }
+
+    .divider-text {
+      font-family: 'Archivo', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #FFFFFF;
+      white-space: nowrap;
+    }
+
+    /* ===== PROGRAMME SECTION ===== */
+    .programme-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 601px;
+    }
+
+    .programme-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .programme-card {
+      width: 100%;
+      border-radius: 15px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    }
+
+    .programme-card-inner {
+      background: #101010;
+      border-radius: 14px;
+      padding: 5px;
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .programme-mockup {
+      width: 237px;
+      min-width: 237px;
+      height: 164px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .programme-info {
+      flex: 1;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .programme-day-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .day-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Archivo', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #FFFFFF;
+    }
+
+    .day-number {
+      background: #CAEA6E;
+      color: #101010;
+      font-family: 'Archivo', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 35px;
+      padding: 2px 10px;
+    }
+
+    .day-date {
+      font-family: 'Archivo', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      color: #FFFFFF;
+      opacity: 0.5;
+      text-transform: uppercase;
+    }
+
+    .day-time {
+      font-family: 'Archivo', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #CAEA6E;
+    }
+
+    .programme-desc {
+      font-family: 'Archivo', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 1.5;
+    }
+
+    /* ===== BONUS SECTION ===== */
+    .bonus-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .bonus-cards {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .bonus-card-img {
+      width: 290px;
+      height: 274px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    /* ===== CADEAU SECTION ===== */
+    .cadeau-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      width: 100%;
+      max-width: 900px;
+    }
+
+    .cadeau-content {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+      border-radius: 15px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    }
+
+    .cadeau-content-inner {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      width: 100%;
+      background: #101010;
+      border-radius: 14px;
+      padding: 5px;
+    }
+
+    .cadeau-illustration {
+      width: 372px;
+      min-width: 300px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .cadeau-info {
+      flex: 1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 14px;
+    }
+
+    .cadeau-price-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cadeau-old-price {
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #FFFFFF;
+      opacity: 0.6;
+      text-decoration: line-through;
+    }
+
+    .cadeau-offert {
+      background: #CAEA6E;
+      color: #101010;
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 50px;
+      padding: 4px 14px;
+    }
+
+    .cadeau-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 24px;
+      font-weight: 500;
+      color: #FFFFFF;
+      line-height: 1.3;
+    }
+
+    .cadeau-desc {
+      font-family: 'Archivo', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #FFFFFF;
+      line-height: 1.5;
+    }
+
+    /* ===== LIVE CTA SECTION ===== */
+    .live-cta-section {
+      width: 100%;
+      max-width: 862px;
+      border-radius: 15px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
+    }
+
+    .live-cta-inner {
+      background: #101010;
+      border-radius: 14px;
+      padding: 5px;
+      display: flex;
+      align-items: stretch;
+    }
+
+    .live-photo-wrapper {
+      position: relative;
+      width: 379px;
+      min-width: 379px;
+      height: 262px;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .live-photo {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .live-photo-gradient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4));
+    }
+
+    .live-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 8px;
+      padding: 6px 12px;
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #FF4444;
+      animation: pulse-dot 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    .live-text {
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .live-info {
+      flex: 1;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .live-title {
+      font-family: 'Archivo', sans-serif;
+      font-size: 28px;
+      font-weight: 400;
+      color: #FFFFFF;
+      text-align: center;
+    }
+
+    .live-date-pills {
+      display: flex;
+      gap: 10px;
+    }
+
+    .date-pill {
+      background: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 7px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      min-width: 85px;
+    }
+
+    .date-pill-jour {
+      font-family: 'Archivo', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      color: #101010;
+      opacity: 0.6;
+    }
+
+    .date-pill-number {
+      font-family: 'Archivo', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      color: #CAEA6E;
+      line-height: 1.2;
+    }
+
+    .date-pill-month {
+      font-family: 'Archivo', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: #101010;
+    }
+
+    .live-cta-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .live-counter {
+      text-align: center;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer-section {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding: 60px 20px 40px;
+    }
+
+    .footer-logo {
+      width: 180px;
+      height: auto;
+    }
+
+    .footer-disclaimer {
+      font-family: 'Archivo', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      color: #FFFFFF;
+      opacity: 0.5;
+      text-align: center;
+      max-width: 900px;
+      line-height: 1.6;
+    }
+
+    .footer-separator {
+      width: 100%;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-bottom {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-copyright {
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+
+    .footer-links {
+      font-family: 'Archivo', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+
+    .footer-links a {
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #CAEA6E;
+    }
+
+    .footer-links .sep {
+      color: #CAEA6E;
+      margin: 0 6px;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .main-heading {
+        font-size: 28px;
+      }
+
+      .hero-photo {
+        width: 280px;
+        height: auto;
+      }
+
+      .hero-dates {
+        width: 100%;
+        margin-top: -40px;
+      }
+
+      .programme-card-inner {
+        flex-direction: column;
+      }
+
+      .programme-mockup {
+        width: 100%;
+        min-width: auto;
+        height: 180px;
+      }
+
+      .bonus-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cadeau-content-inner {
+        flex-direction: column;
+      }
+
+      .cadeau-illustration {
+        width: 100%;
+        min-width: auto;
+      }
+
+      .live-cta-inner {
+        flex-direction: column;
+      }
+
+      .live-photo-wrapper {
+        width: 100%;
+        min-width: auto;
+        height: 200px;
+      }
+
+      .live-date-pills {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .cta-row {
+        flex-direction: column;
+      }
+
+      .counter {
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+  <!-- Background elements -->
+  <img src="upscale-assets/bg-icon.png" alt="" class="bg-polygon" aria-hidden="true">
+  <div class="bg-gradient-overlay" aria-hidden="true"></div>
+
+  <div class="content">
+
+    <!-- 1. LOGO -->
+    <div class="logo-section">
+      <img src="upscale-assets/logo.svg" alt="Upscale">
+    </div>
+
+    <!-- 2. HERO -->
+    <div class="hero">
+      <img src="upscale-assets/hero-photo.png" alt="Mateusz" class="hero-photo">
+      <img src="upscale-assets/date-cards.png" alt="Dates du workshop" class="hero-dates">
+    </div>
+
+    <!-- 3. TITLE SECTION -->
+    <div class="title-section">
+      <!-- Badge -->
+      <div class="badge-row">
+        <span class="badge-text">Upscale 3-Day Workshop</span>
+        <span class="badge-gratuit">Gratuit</span>
+      </div>
+
+      <!-- Heading -->
+      <h1 class="main-heading">Les 3 leviers du top 1 % des coachs en ligne US qui te permettront d'encaisser 600 000&#8239;&euro; en 2026 avec + de 80% de profitabilit&eacute;</h1>
+
+      <!-- Avatars row -->
+      <div class="avatars-row">
+        <div class="avatars-stack">
+          <img src="upscale-assets/avatar-1.jpg" alt="" class="avatar">
+          <img src="upscale-assets/avatar-2.jpg" alt="" class="avatar">
+          <img src="upscale-assets/avatar-3.jpg" alt="" class="avatar">
+          <img src="upscale-assets/avatar-4.jpg" alt="" class="avatar">
+          <img src="upscale-assets/avatar-5.jpg" alt="" class="avatar">
+          <img src="upscale-assets/avatar-6.jpg" alt="" class="avatar">
+          <span class="avatar-count">+150</span>
+        </div>
+        <span class="avatars-label">Coachs<br>acc&eacute;l&eacute;r&eacute;s</span>
+      </div>
+
+      <!-- CTA row -->
+      <div class="cta-row">
+        <a href="#" class="btn-cta">
+          Je r&eacute;serve ma place
+          <span class="arrow">&rarr;</span>
+        </a>
+        <div class="counter">
+          <span class="counter-number">200</span>
+          <span class="counter-label">Places disponibles</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. PROGRAMME SECTION -->
+    <div class="programme-section">
+      <!-- Divider -->
+      <div class="section-divider">
+        <div class="divider-line divider-line-left"></div>
+        <svg class="divider-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CAEA6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+        </svg>
+        <span class="divider-text">programme</span>
+        <div class="divider-line divider-line-right"></div>
+      </div>
+
+      <!-- Cards -->
+      <div class="programme-cards">
+        <!-- Jour 1 -->
+        <div class="programme-card">
+          <div class="programme-card-inner">
+            <img src="upscale-assets/mockup-jour1.png" alt="Jour 1" class="programme-mockup">
+            <div class="programme-info">
+              <div class="programme-day-row">
+                <span class="day-badge">Jour <span class="day-number">1</span></span>
+                <span class="day-date">Dim. 07 d&eacute;c. 2025</span>
+                <span class="day-time">17:00</span>
+              </div>
+              <p class="programme-desc">Dominer 99 % des coachs de ton march&eacute;, vendre &agrave; plus de 3 000 &euro; et te positionner comme le choix logique pour tes prospects</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jour 2 -->
+        <div class="programme-card">
+          <div class="programme-card-inner">
+            <img src="upscale-assets/mockup-jour2.png" alt="Jour 2" class="programme-mockup">
+            <div class="programme-info">
+              <div class="programme-day-row">
+                <span class="day-badge">Jour <span class="day-number">2</span></span>
+                <span class="day-date">LUN. 08 d&eacute;c. 2025</span>
+                <span class="day-time">17:00</span>
+              </div>
+              <p class="programme-desc">Obtenir des appels de vente avec des prospects qui paient ton offre high-ticket en one shot, sans avoir &agrave; traiter d'objections</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Jour 3 -->
+        <div class="programme-card">
+          <div class="programme-card-inner">
+            <img src="upscale-assets/mockup-jour3.png" alt="Jour 3" class="programme-mockup">
+            <div class="programme-info">
+              <div class="programme-day-row">
+                <span class="day-badge">Jour <span class="day-number">3</span></span>
+                <span class="day-date">MAR. 09 d&eacute;c. 2025</span>
+                <span class="day-time">17:00</span>
+              </div>
+              <p class="programme-desc">B&acirc;tir une &eacute;quipe de Navy SEALs pour sortir de l'op&eacute;rationnel sans d&eacute;t&eacute;riorer la qualit&eacute; de ton coaching</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. BONUS SECTION -->
+    <div class="bonus-section">
+      <!-- Divider -->
+      <div class="section-divider">
+        <div class="divider-line divider-line-left"></div>
+        <svg class="divider-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CAEA6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 12v10H4V12"></path>
+          <path d="M2 7h20v5H2z"></path>
+          <path d="M12 22V7"></path>
+          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+        </svg>
+        <span class="divider-text">Bonus</span>
+        <div class="divider-line divider-line-right"></div>
+      </div>
+
+      <!-- Cards -->
+      <div class="bonus-cards">
+        <img src="upscale-assets/bonus-1.png" alt="Bonus 1" class="bonus-card-img">
+        <img src="upscale-assets/bonus-2.png" alt="Bonus 2" class="bonus-card-img">
+        <img src="upscale-assets/bonus-3.png" alt="Bonus 3" class="bonus-card-img">
+      </div>
+    </div>
+
+    <!-- 6. CADEAU SECTION -->
+    <div class="cadeau-section">
+      <!-- Divider -->
+      <div class="section-divider">
+        <div class="divider-line divider-line-left"></div>
+        <svg class="divider-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CAEA6E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 12v10H4V12"></path>
+          <path d="M2 7h20v5H2z"></path>
+          <path d="M12 22V7"></path>
+          <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+          <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+        </svg>
+        <span class="divider-text">Cadeau</span>
+        <div class="divider-line divider-line-right"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="cadeau-content">
+        <div class="cadeau-content-inner">
+          <img src="upscale-assets/gift-illustration.png" alt="Cadeau" class="cadeau-illustration">
+          <div class="cadeau-info">
+            <div class="cadeau-price-row">
+              <span class="cadeau-old-price">1 000 &euro;</span>
+              <span class="cadeau-offert">Offert</span>
+            </div>
+            <h3 class="cadeau-title">Gagne mon mastermind en Tha&iuml;lande</h3>
+            <p class="cadeau-desc">Le troisi&egrave;me jour du workshop se terminera par un tirage au sort offrant une place &agrave; mon prochain mastermind de f&eacute;vrier 2026 en Tha&iuml;lande.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. LIVE CTA SECTION -->
+    <div class="live-cta-section">
+      <div class="live-cta-inner">
+        <!-- Photo -->
+        <div class="live-photo-wrapper">
+          <img src="upscale-assets/mateusz-live.jpg" alt="Mateusz Live" class="live-photo">
+          <div class="live-photo-gradient"></div>
+          <div class="live-badge">
+            <span class="live-dot"></span>
+            <span class="live-text">Live</span>
+          </div>
+        </div>
+
+        <!-- Info -->
+        <div class="live-info">
+          <h2 class="live-title">Upscale 3-Day Workshop</h2>
+
+          <div class="live-date-pills">
+            <div class="date-pill">
+              <span class="date-pill-jour">Jour 1</span>
+              <span class="date-pill-number">07</span>
+              <span class="date-pill-month">D&eacute;c. 2025</span>
+            </div>
+            <div class="date-pill">
+              <span class="date-pill-jour">Jour 2</span>
+              <span class="date-pill-number">08</span>
+              <span class="date-pill-month">D&eacute;c. 2025</span>
+            </div>
+            <div class="date-pill">
+              <span class="date-pill-jour">Jour 3</span>
+              <span class="date-pill-number">09</span>
+              <span class="date-pill-month">D&eacute;c. 2025</span>
+            </div>
+          </div>
+
+          <div class="live-cta-bottom">
+            <a href="#" class="btn-cta">
+              Je r&eacute;serve ma place
+              <span class="arrow">&rarr;</span>
+            </a>
+            <div class="live-counter">
+              <span class="counter-number">200</span>
+              <span class="counter-label"> Places disponibles</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8. FOOTER -->
+    <footer class="footer-section">
+      <img src="upscale-assets/logo.svg" alt="Upscale" class="footer-logo">
+      <p class="footer-disclaimer">This site is not a part of the Facebook website or Facebook Inc. Additionally, this site is NOT endorsed by Facebook in any way. FACEBOOK is a trademark of FACEBOOK, Inc. Ceci n'est pas une promesse de r&eacute;sultat. Les r&eacute;sultats pr&eacute;sent&eacute;s sont ceux de clients et ne garantissent pas les m&ecirc;mes r&eacute;sultats pour tous.</p>
+      <div class="footer-separator"></div>
+      <div class="footer-bottom">
+        <span class="footer-copyright">&copy; Upscale | Tous droits r&eacute;serv&eacute;s</span>
+        <span class="footer-links">
+          <a href="#">Mentions l&eacute;gales</a>
+          <span class="sep">|</span>
+          <a href="#">Confidentialit&eacute;</a>
+        </span>
+      </div>
+    </footer>
+
+  </div>
+</div>
+
+</body>
+</html>
